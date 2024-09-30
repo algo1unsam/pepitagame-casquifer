@@ -11,6 +11,7 @@ describe "Tests de Pepita" {
 	}
 
 	test "Al comer pepita aumenta su energia" {
+		pepita.position(game.at(1, 8))
 		pepita.come(manzana)
 		assert.equals(140, pepita.energia())
 	}

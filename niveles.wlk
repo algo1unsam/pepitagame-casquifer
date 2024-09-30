@@ -3,6 +3,13 @@ import comidas.*
 import extras.*
 import wollok.game.*
 
+
+object mensajeEnergia{
+	const property position = game.at(2, 9)
+	method text() = "Energia Pepita: " + pepita.energia()
+	method textColor() = "#ffffffff"  
+}
+
 object tutorial1 {
 
 	method iniciar() {
@@ -35,6 +42,7 @@ object tutorial3 {
 		game.addVisual(nido)
 		game.addVisual(silvestre)
 		game.addVisual(pepita)
+		game.addVisual(mensajeEnergia)
 		config.configurarTeclas()
 		config.configurarColisiones()
 	//	config.configurarGravedad()

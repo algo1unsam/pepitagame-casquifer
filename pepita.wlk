@@ -35,11 +35,11 @@ object pepita {
 		if (self.energia() > 0) {
 			self.vola(position.distance(nuevaPosicion))
 			position = nuevaPosicion
-			energia = energia - 1
 		} else {
 			game.schedule(2000, { game.stop() })
 		}
 	}
+	
 
 	method estaCansada() {
 		return energia <= 0
@@ -48,10 +48,6 @@ object pepita {
 	method estaEnElNido() {
 		return position == nido.position()
 	}
-
-	method pepitaGano () = "Gané!"
-
-	method pepitaPerdio () = "Perdí!"
 
 	method estaEnElSuelo() {
 		return position.y() == 0 
