@@ -2,7 +2,6 @@ import extras.*
 import wollok.game.*
 
 object pepita {
-
 	var property energia = 100
 	var property position = game.origin()
 
@@ -39,7 +38,6 @@ object pepita {
 			game.schedule(2000, { game.stop() })
 		}
 	}
-	
 
 	method estaCansada() {
 		return energia <= 0
@@ -53,5 +51,10 @@ object pepita {
 		return position.y() == 0 
 	}
 
+	method gravedad(nuevaPosicion){
+		if(self.position().y() > 0){
+			position = nuevaPosicion
+		}
+	}
 }
 
