@@ -2,16 +2,28 @@ import extras.*
 import wollok.game.*
 
 object pepita {
-
 	var property energia = 100
 	var property position = game.origin()
 
+	method esAtrapada(){
+		return self.position() == silvestre.position()
+	}
+
 	method image() {
-		return if (self.estaEnElNido()) "pepita-grande.png" else "pepita.png"
+		return if (self.estaEnElNido()) {
+			"pepita-grande.png"
+			} else if (self.esAtrapada() or self.estaCansada() or self.estaCansada()){
+				"pepita-gris.png"
+				}
+					else {
+						"pepita.png"}
 	}
 
 	method come(comida) {
-		energia = energia + comida.energiaQueOtorga()
+		if (self.position() == comida.position()) {
+			energia = energia + comida.energiaQueOtorga()
+			game.removeVisual(comida)
+		}
 	}
 
 	method vola(kms) {
@@ -19,8 +31,12 @@ object pepita {
 	}
 
 	method irA(nuevaPosicion) {
-		self.vola(position.distance(nuevaPosicion))
-		position = nuevaPosicion
+		if (self.energia() > 0) {
+			self.vola(position.distance(nuevaPosicion))
+			position = nuevaPosicion
+		} else {
+			game.schedule(2000, { game.stop() })
+		}
 	}
 
 	method estaCansada() {
@@ -30,11 +46,15 @@ object pepita {
 	method estaEnElNido() {
 		return position == nido.position()
 	}
-	
-	
+
 	method estaEnElSuelo() {
 		return position.y() == 0 
 	}
 
+	method gravedad(nuevaPosicion){
+		if(self.position().y() > 0){
+			position = nuevaPosicion
+		}
+	}
 }
 
